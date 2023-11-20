@@ -1,1 +1,1 @@
-# tuto_cpl_mnh_ww3_croco
+# Tree template for Meso-NH / WW3 / CROCO coupling
