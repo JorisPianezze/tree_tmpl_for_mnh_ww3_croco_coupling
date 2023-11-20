@@ -1,0 +1,8 @@
+*.inp
+ST4TABUHF2.bin
+*.ww3
+*.nc
+*.out
+*.log
+spectre
+ww3_bound.inp

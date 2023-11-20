@@ -1,0 +1,80 @@
+#!/bin/sh
+#########################################################
+#SBATCH -J C_cpl_mnh_croco
+#SBATCH -N 10
+#SBATCH -n 938
+#SBATCH -p normal256
+#SBATCH  --exclusive
+#SBATCH  --no-requeue
+#SBATCH  --time=24:00:00
+#########################################################
+
+ulimit -s unlimited
+ulimit -c 0
+
+# --------------------------------------------------
+# -- load Meso-NH/SurfEx environment variables
+# --------------------------------------------------
+
+. ../../models/MNH-V5-5-0/conf/profile_mesonh
+
+#~~~~~~ MESONH
+ln -sf ${SRC_MESONH}/exe/MESONH${XYZ} mesonh.exe 
+
+#~~~~~~ CROCO
+export dir_exe_croco=../../models/croco-v1.1/exe_IROISE_1core_CPLOA_CPLOW
+ln -sf ${dir_exe_croco}/croco croco.exe
+
+#~~~~~~ WW3
+ln -sf ../../models/ww3_v7-12/model/exe_OASACM_OASOCM/ww3_shel ww3_shel.exe
+
+#~~~~~~ XIOS
+#ln -sf ${XIOS_DIR}/bin/xios_server.exe .
+
+# --------------------------------------------------
+# -- link to the data
+# --------------------------------------------------
+
+#~~~~~ MESONH
+ln -sf ../1_input_mnh/PGD_IROISE_5km.* .
+ln -sf ../1_input_mnh/ECMWF_20210915_??.* .
+ln -sf ../1_input_mnh/EXSEG1.nam_C_mnh_ww3_croco EXSEG1.nam
+
+#~~~~~ CROCO
+ln -sf ../3_input_croco/croco_grd.nc .
+ln -sf ../3_input_croco/croco_ini_mercator_15597.5.nc croco_ini.nc
+ln -sf ../3_input_croco/croco_bry_mercator_15597.5.nc croco_bry.nc
+ln -sf ../3_input_croco/croco.in_C_mnh_ww3_croco croco.in
+
+#~~~~~~ WW3
+ln -sf ../2_input_ww3/mapsta.ww3 .
+ln -sf ../2_input_ww3/mask.ww3 .
+ln -sf ../2_input_ww3/mod_def.ww3 .
+ln -sf ../2_input_ww3/ST4TABUHF2.bin .
+ln -sf ../2_input_ww3/nest.ww3 .
+ln -sf ../2_input_ww3/ww3_shel.nml_C_cpl_mnh_ww3_croco ww3_shel.nml
+ln -sf ../A2_frc_ww3_spinup/restart001.ww3 restart.ww3
+
+#~~~~~~ OASIS
+ln -sf ../4_input_oasis/namcouple_C_cpl_mnh_ww3_croco namcouple
+cp     ../4_input_oasis/rmp_*.nc .
+cp     ../4_input_oasis/rst_*.nc .
+
+#~~~~~~ XIOS
+#ln -sf ../2_input_nemo/axis_def.xml .
+#ln -sf ../2_input_nemo/domain_def.xml .
+#ln -sf ../2_input_nemo/field_def.xml .
+#ln -sf ../2_input_nemo/grid_def.xml .
+#ln -sf ../2_input_nemo/file_def.xml_3D file_def.xml
+#ln -sf ../2_input_nemo/iodef.xml .
+
+# -------------------------------------------------------
+# simulation
+# -------------------------------------------------------
+#========
+#---
+mpirun -np 2 ./mesonh.exe : -np 1 ./croco.exe : -np 1 ./ww3_shel.exe
+#
+#---
+#========
+

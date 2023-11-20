@@ -1,0 +1,11 @@
+*.des
+*.nc
+OUTPUT_*
+PGD_*
+PRE_REAL1.nam_2021091500
+PRE_REAL1.nam_2021091506
+ecmwf.*
+file_for_xtransfer
+*.dir
+*.hdr
+output_*

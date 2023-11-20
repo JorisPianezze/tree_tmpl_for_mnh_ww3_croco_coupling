@@ -1,0 +1,28 @@
+&NAM_CONFIO            LCDF4=T,  LLFIOUT=F,  LLFIREAD=F /
+
+&NAM_PGDFILE           CPGDFILE='PGD_IROISE_5km', NHALO= 0 /
+
+&NAM_PGD_GRID          CGRID='CONF PROJ' /
+
+&NAM_CONF_PROJ         XLON0 =  -4.9, XLAT0 = 48.2, XRPK  = 0.7373, XBETA =   0.0 /
+
+&NAM_CONF_PROJ_GRID    XLONCEN =  -4.9,  XLATCEN =  48.2,
+                       NIMAX   =    40,  NJMAX   =    40,
+                       XDX     =  5000., XDY     =  5000. /
+
+&NAM_COVER             YCOVER = 'ECOCLIMAP_v2.0', YCOVERFILETYPE = 'DIRECT' /
+
+&NAM_ZS                YZS       = 'gtopo30', YZSFILETYPE = 'DIRECT' /
+&NAM_ZSFILTER          NZSFILTER = 1 /
+
+&NAM_ISBA YCLAY='CLAY_HWSD_MOY',
+          YCLAYFILETYPE='DIRECT',
+          YSAND='SAND_HWSD_MOY',
+          YSANDFILETYPE='DIRECT' /
+
+&NAM_PGD_SCHEMES       CNATURE = 'ISBA',
+                       CSEA    = 'SEAFLX',
+                       CTOWN   = 'NONE',
+                       CWATER  = 'WATFLX' /
+
+&NAM_PGD_ARRANGE_COVER LTOWN_TO_ROCK=.TRUE. /

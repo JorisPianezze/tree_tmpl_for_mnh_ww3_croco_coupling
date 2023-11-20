@@ -1,0 +1,17 @@
+&NAM_CONFIO     LCDF4=.TRUE., LLFIOUT=.FALSE., LLFIREAD=.FALSE. /
+
+&NAM_REAL_CONF  NVERB=5, CEQNSYS='DUR', CPRESOPT='CRESI', LRES=.FALSE., XRES=1.E-07 /
+
+&NAM_FILE_NAMES HATMFILE='ecmwf.YEARMONTHDAY.HOUR',
+                HATMFILETYPE='GRIBEX',
+                HPGDFILE='PGD_IROISE_5km',
+                CINIFILE='ECMWF_YEARMONTHDAY_HOUR' /
+
+&NAM_VER_GRID   LTHINSHELL=.TRUE.,
+                YZGRID_TYPE='FUNCTN',
+                NKMAX=30,
+                ZDZGRD=40.,
+                ZDZTOP=600.,
+                ZZMAX_STRGRD=600.,
+                ZSTRGRD=7.,
+                ZSTRTOP=8. /
