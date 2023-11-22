@@ -26,3 +26,7 @@
                        CWATER  = 'WATFLX' /
 
 &NAM_PGD_ARRANGE_COVER LTOWN_TO_ROCK=.TRUE. /
+
+&NAM_SEABATHY YSEABATHY         = 'etopo2.nc',
+              YSEABATHYFILETYPE = 'NETCDF',
+              YNCVARNAME        = 'topo' /

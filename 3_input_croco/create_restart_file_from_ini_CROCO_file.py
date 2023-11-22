@@ -31,10 +31,10 @@ if cfg_debug : print('+++                                           ')
 if cfg_debug : print('++++++++++++++++++++++++++++++++++++++++++++++')
 
 file_grd = netCDF4.Dataset(curdir_path+'croco_grd.nc')
-file_ini = netCDF4.Dataset(curdir_path+'croco_ini_mercator_15597.5.nc')
+file_ini = netCDF4.Dataset(curdir_path+'croco_ini_mercator_Y2020M09.nc')
 
-lon=file_grd.variables['x_rho'][1:-1,1:-1]
-lat=file_grd.variables['y_rho'][1:-1,1:-1]
+lon=file_grd.variables['lon_rho'][1:-1,1:-1]
+lat=file_grd.variables['lat_rho'][1:-1,1:-1]
 
 sst=file_ini.variables['temp'][0,-1,1:-1,1:-1]
 ssh=file_ini.variables['zeta'][0,1:-1,1:-1]
@@ -59,7 +59,7 @@ print('nlat_CROCO', nlat_CROCO)
 #====================================================
 #===   1.0 Create the netcdf restart file
 #====================================================
-fout=netCDF4.Dataset(curdir_path+'rstrt_SAVE.nc','w',format='NETCDF3_64BIT')
+fout=netCDF4.Dataset(curdir_path+'rstrt_CROCO.nc','w',format='NETCDF3_64BIT')
 fout.Description='Restart file for CROCO coupling'
 
 #====================================================

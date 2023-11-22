@@ -138,7 +138,7 @@
 ! -------------------------------------------------------------------- !
 &GRID_NML
   GRID%NAME         =  'IROISE'
-  GRID%NML          =  '../2_input_ww3/namelists_IROISE.nml'
+  GRID%NML          =  'namelists_IROISE.nml'
   GRID%TYPE         =  'CURV'
   GRID%COORD        =  'SPHE'
   GRID%CLOS         =  'NONE'
@@ -200,10 +200,10 @@
   CURV%NY              =  40
   CURV%XCOORD%SF        =  1.0
   CURV%XCOORD%OFF       =  0.0
-  CURV%XCOORD%FILENAME  =  'IROISE_10km.lon.inp'
+  CURV%XCOORD%FILENAME  =  'grid/WW3_IROISE_DX5KM.lon.inp'
   CURV%YCOORD%SF        =  1.0
   CURV%YCOORD%OFF       =  0.0
-  CURV%YCOORD%FILENAME  =  'IROISE_10km.lat.inp'
+  CURV%YCOORD%FILENAME  =  'grid/WW3_IROISE_DX5KM.lat.inp'
 /
 
 ! -------------------------------------------------------------------- !
@@ -243,7 +243,7 @@
 !     DEPTH%FORMAT         = '(....)' ! formatted read format
 ! -------------------------------------------------------------------- !
 &DEPTH_NML
-  DEPTH%FILENAME  =  'IROISE_10km.bathy.inp'
+  DEPTH%FILENAME  =  'grid/WW3_IROISE_DX5KM.bathy.inp'
 /
 
 ! -------------------------------------------------------------------- !
@@ -287,7 +287,7 @@
 !     MASK%FORMAT           = '(....)' ! formatted read format
 ! -------------------------------------------------------------------- !
 &MASK_NML
-  MASK%FILENAME  =  'IROISE_10km.mask_and_bdy.inp'
+  MASK%FILENAME  =  'grid/WW3_IROISE_DX5KM.mask.inp'
 /
 
 ! -------------------------------------------------------------------- !
@@ -338,7 +338,7 @@
 !     OBST%FORMAT          = '(....)' ! formatted read format
 ! -------------------------------------------------------------------- !
 &OBST_NML
-  OBST%FILENAME  =  'IROISE_10km.obst.inp'
+  OBST%FILENAME  =  'grid/WW3_IROISE_DX5KM.obst.inp'
 /
 
 ! -------------------------------------------------------------------- !

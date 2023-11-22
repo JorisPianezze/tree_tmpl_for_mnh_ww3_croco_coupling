@@ -65,7 +65,7 @@
 !     FILE%TIMESHIFT     = '00000000 000000' ! shift the time value to 'YYYYMMDD HHMMSS'
 ! -------------------------------------------------------------------- !
 &FILE_NML
-  FILE%FILENAME      = 'wind.nc'
+  FILE%FILENAME      = 'wind/wind.nc'
   FILE%LONGITUDE     = 'longitude'
   FILE%LATITUDE      = 'latitude'
   FILE%VAR(1)        = 'u10m'

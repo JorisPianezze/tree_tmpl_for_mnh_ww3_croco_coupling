@@ -3,6 +3,6 @@ channels:
     - defaults
     - conda-forge
 dependencies:
-    - python
-    - ipython
+    - python=3.6
+    - pip
     - motuclient

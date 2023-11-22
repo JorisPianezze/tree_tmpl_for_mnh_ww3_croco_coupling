@@ -1,0 +1,4 @@
+if ( indicatorOfParameter == 165 || indicatorOfParameter == 166  ) {
+write "[dataDate]_[cfVarName].grib[edition]";
+}
+

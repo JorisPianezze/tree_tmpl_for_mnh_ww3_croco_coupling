@@ -6,7 +6,6 @@
 #SBATCH -o output_PREP_PGD.eo%j
 #SBATCH -e output_PREP_PGD.eo%j
 #SBATCH -t 01:00:00
-#SBATCH -p normal256
 #SBATCH  --exclusive
 #SBATCH  --no-requeue
 #######################################################
@@ -18,7 +17,7 @@ ulimit -c 0
 #    Load Meso-NH/SurfEx environment variables
 # --------------------------------------------------
 
-. /path/to/your/profile_mesonh
+. /home/piaj/03_workdir/2J_devel_MNH_WW3_CROCO/models/MNH-V5-7-0/conf/profile_mesonh-LXgfortran-R8I4-MNH-V5-6-1-OASISAUTO-MPIAUTO-DEBUG
 
 if [ -z ${XYZ} ] ; then
    echo '      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~           '

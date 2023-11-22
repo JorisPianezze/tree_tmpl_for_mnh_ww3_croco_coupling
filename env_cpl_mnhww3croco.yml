@@ -1,0 +1,8 @@
+name: env_cpl_mnhww3croco
+channels:
+  - defaults
+dependencies:
+  - python=3.11.5
+  - numpy=1.26.0
+  - netcdf4=1.6.2
+  - matplotlib=3.7.2

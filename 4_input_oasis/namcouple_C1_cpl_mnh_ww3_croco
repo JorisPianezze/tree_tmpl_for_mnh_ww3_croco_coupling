@@ -48,7 +48,7 @@ MNH__U10 WW3__U10 1 600 1 rst_A.nc EXPORTED
 40 40 40 40 atmt wavt LAG=+20
 R  0  R  0
 MAPPING
-rmp_atmt_to_wavt_DISTWGT.nc
+rmp_atmt_to_wavt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 2 : 
@@ -57,7 +57,7 @@ MNH__V10 WW3__V10 1 600 1 rst_A.nc EXPORTED
 40 40 40 40 atmt wavt LAG=+20
 R  0  R  0
 MAPPING
-rmp_atmt_to_wavt_DISTWGT.nc
+rmp_atmt_to_wavt_DISTWGT_4.nc
 #
 #                     ------------------------------------------
 #                        WW3 (wwatch) ==> MESONH (mesonh)
@@ -71,7 +71,7 @@ WW3_ACHA MNH__CHA 1 600 1 rst_W.nc EXPORTED
 40 40 40 40 wavt atmt LAG=+100
 R  0  R  0
 MAPPING
-rmp_wavt_to_atmt_DISTWGT.nc
+rmp_wavt_to_atmt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 4 : 
@@ -80,7 +80,7 @@ WW3__AHS MNH___HS 1 600 1 rst_W.nc EXPORTED
 40 40 40 40 wavt atmt LAG=+100
 R  0  R  0
 MAPPING
-rmp_wavt_to_atmt_DISTWGT.nc
+rmp_wavt_to_atmt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 5 : 
@@ -89,7 +89,7 @@ WW3__FWS MNH___TP 1 600 1 rst_W.nc EXPORTED
 40 40 40 40 wavt atmt LAG=+100
 R  0  R  0
 MAPPING
-rmp_wavt_to_atmt_DISTWGT.nc
+rmp_wavt_to_atmt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 6 : 
@@ -98,7 +98,7 @@ WW3_WSSU MNH_WSSU 1 600 1 rst_W.nc EXPORTED
 40 40 40 40 wavt atmt LAG=+100
 R  0  R  0
 MAPPING
-rmp_wavt_to_atmt_DISTWGT.nc
+rmp_wavt_to_atmt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 7 : 
@@ -107,7 +107,7 @@ WW3_WSSV MNH_WSSV 1 600 1 rst_W.nc EXPORTED
 40 40 40 40 wavt atmt LAG=+100
 R  0  R  0
 MAPPING
-rmp_wavt_to_atmt_DISTWGT.nc
+rmp_wavt_to_atmt_DISTWGT_4.nc
 #
 #                     ------------------------------------------
 #                        MNH (mesonh) ==> CROCO (crocox)
@@ -121,7 +121,7 @@ MNH_TAUX RRMTAUX0 1 600 2 rst_A.nc EXPORTED
 40 40 38 38 atmt ocnt LAG=+20
 R  0  R  0
 MAPPING BLASNEW
-rmp_atmt_to_ocnt_DISTWGT.nc
+rmp_atmt_to_ocnt_DISTWGT_4.nc
 -1.0 0
 #
 #~~~~~~~~~~~
@@ -131,7 +131,7 @@ MNH_TAUY RRMTAUY0 1 600 2 rst_A.nc EXPORTED
 40 40 38 38 atmt ocnt LAG=+20
 R  0  R  0
 MAPPING BLASNEW
-rmp_atmt_to_ocnt_DISTWGT.nc
+rmp_atmt_to_ocnt_DISTWGT_4.nc
 -1.0 0
 #
 #~~~~~~~~~~~
@@ -141,7 +141,7 @@ MNH_HEAT RRMSTFL0 1 600 1 rst_A.nc EXPORTED
 40 40 38 38 atmt ocnt LAG=+20
 R  0  R  0
 MAPPING
-rmp_atmt_to_ocnt_DISTWGT.nc
+rmp_atmt_to_ocnt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 11 : 
@@ -150,7 +150,7 @@ MNH_SNET RRMSRFL0 1 600 1 rst_A.nc EXPORTED
 40 40 38 38 atmt ocnt LAG=+20
 R  0  R  0
 MAPPING
-rmp_atmt_to_ocnt_DISTWGT.nc
+rmp_atmt_to_ocnt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 12 : 
@@ -159,7 +159,7 @@ MNH_EVPR RRMEVPR0 1 600 2 rst_A.nc EXPORTED
 40 40 38 38 atmt ocnt LAG=+20
 R  0  R  0
 MAPPING BLASNEW
-rmp_atmt_to_ocnt_DISTWGT.nc
+rmp_atmt_to_ocnt_DISTWGT_4.nc
 -1.0 0
 #
 #                     ------------------------------------------
@@ -174,7 +174,7 @@ SRMSSTV0 MNH__SST 1 600 1 rst_O.nc EXPORTED
 38 38 40 40 ocnt atmt LAG=+100
 R  0  R  0
 MAPPING
-rmp_ocnt_to_atmt_DISTWGT.nc
+rmp_ocnt_to_atmt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 14 : 
@@ -183,7 +183,7 @@ rmp_ocnt_to_atmt_DISTWGT.nc
 #38 38 40 40 ocnt atmt LAG=+6000
 #R  0  R  0
 #MAPPING
-#rmp_atmt_to_ocnt_DISTWGT.nc
+#rmp_atmt_to_ocnt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field : 
@@ -192,7 +192,7 @@ rmp_ocnt_to_atmt_DISTWGT.nc
 #38 38 40 40 ocnt atmt LAG=+6000
 #R  0  R  0
 #MAPPING
-#rmp_atmt_to_ocnt_DISTWGT.nc
+#rmp_atmt_to_ocnt_DISTWGT_4.nc
 #
 #                     ------------------------------------------
 #                        WW3 (wwatch) ==> CROCO (crocox)
@@ -206,7 +206,7 @@ WW3__OHS RRM__HS0 1 600 1 rst_W.nc EXPORTED
 40 40 38 38 wavt ocnt LAG=+100
 R  0  R  0
 MAPPING
-rmp_wavt_to_ocnt_DISTWGT.nc
+rmp_wavt_to_ocnt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 15 : 
@@ -215,7 +215,7 @@ WW3_T0M1 RRMT0M10 1 600 1 rst_W.nc EXPORTED
 40 40 38 38 wavt ocnt LAG=+100
 R  0  R  0
 MAPPING
-rmp_wavt_to_ocnt_DISTWGT.nc
+rmp_wavt_to_ocnt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 16 : 
@@ -224,7 +224,7 @@ WW3__DIR RRM_DIR0 1 600 1 rst_W.nc EXPORTED
 40 40 38 38 wavt ocnt LAG=+100
 R  0  R  0
 MAPPING
-rmp_wavt_to_ocnt_DISTWGT.nc
+rmp_wavt_to_ocnt_DISTWGT_4.nc
 #
 #                     ------------------------------------------
 #                        CROCO (crocox) ==> WW3 (wwatch)
@@ -238,7 +238,7 @@ SRMSSHV0 WW3__SSH 1 600 1 rst_O.nc EXPORTED
 38 38 40 40 ocnt wavt LAG=+100
 R  0  R  0
 MAPPING
-rmp_ocnt_to_wavt_DISTWGT.nc
+rmp_ocnt_to_wavt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 19 : 
@@ -247,7 +247,7 @@ SRMUOCE0 WW3_OSSU 1 600 1 rst_O.nc EXPORTED
 38 38 40 40 ocnt wavt LAG=+100
 R  0  R  0
 MAPPING
-rmp_ocnt_to_wavt_DISTWGT.nc
+rmp_ocnt_to_wavt_DISTWGT_4.nc
 #
 #~~~~~~~~~~~
 # Field 20 : 
@@ -256,6 +256,6 @@ SRMVOCE0 WW3_OSSV 1 600 1 rst_O.nc EXPORTED
 38 38 40 40 ocnt wavt LAG=+100
 R  0  R  0
 MAPPING
-rmp_ocnt_to_wavt_DISTWGT.nc
+rmp_ocnt_to_wavt_DISTWGT_4.nc
 #
  $END

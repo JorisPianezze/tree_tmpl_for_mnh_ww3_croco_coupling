@@ -88,7 +88,7 @@ print('nlat_WW3', nlat_WW3)
 #====================================================
 #===   1.0 Create the netcdf restart file
 #====================================================
-fout=netCDF4.Dataset(curdir_path+'rstrt_SAVE.nc','w',format='NETCDF3_64BIT')
+fout=netCDF4.Dataset(curdir_path+'rstrt_WW3.nc','w',format='NETCDF3_64BIT')
 fout.Description='Restart file for WW3 coupling'
 
 #====================================================

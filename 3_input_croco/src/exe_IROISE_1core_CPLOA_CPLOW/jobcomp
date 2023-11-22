@@ -9,16 +9,10 @@
 # or take into account the following 
 # environment variables for compilation choices :
 #
-# CROCODIR             : CROCO directory
-# NETCDF_CONFIG        : NETCDF config
-# OASISDIR             : OASIS-MCT directory 
-# XIOS_DIR             : XIOS directory
-# 
-# In my .bashrc file :
-# export NETCDF_CONFIG=/usr/bin/nc-config
-# export CROCODIR=${HOME}/02_models/croco-v1.1_abl
-# export OASISDIR=${HOME}/02_models/oasis3-mct_4.0/ubuntu-18.04_oasis3-mct
-# export XIOS_DIR=${HOME}/02_models/xios-2.5
+# CROCO_NETCDFLIB      : netcdf library
+# CROCO_NETCDFINC      : netcdf include 
+# CROCO_PRISM_ROOT_DIR : OASIS-MCT directory 
+# CROCO_XIOS_ROOT_DIR  : XIOS directory
 #
 # CROCO_CFT1           : compiler
 # CROCO_FFLAGS1        : compilation otpions
@@ -61,10 +55,6 @@ MPIINC="-I/usr/include"
 #-lnetcdff          : version netcdf-fortran-4.2-gfortran --
 #-----------------------------------------------------------
 #
-#NETCDFLIB="-L/usr/local/lib -lnetcdf"
-#NETCDFINC="-I/usr/local/include"
-#NETCDFLIB=$(nf-config --flibs)
-#NETCDFINC=-I$(nf-config --includedir)
 NETCDFLIB=$($NETCDF_CONFIG --flibs)
 NETCDFINC=$($NETCDF_CONFIG --fflags)
 
@@ -76,7 +66,11 @@ PRISM_ROOT_DIR=${OASISDIR}
 #
 # set XIOS directory if needed
 #
-XIOS_ROOT_DIR=${XIOS_DIR}
+# if coupling with OASIS3-MCT is activated :
+# => you need to use XIOS compiled with the "--use_oasis oasis3_mct" flag
+#-----------------------------------------------------------
+XIOS_ROOT_DIR=$HOME/xios
+
 #
 # END OF USER'S MODIFICATIONS
 ####################################################
@@ -121,11 +115,11 @@ else
         echo "  file namelist_pisces copied from source directory"
 fi
 
-if [[ -d FIC_NAMELIST ]]; then
-        echo "  Mustang namelist directory FIC_NAMELIST exists"
+if [[ -d MUSTANG_NAMELIST ]]; then
+        echo "  Mustang namelist directory MUSTANG_NAMELIST exists"
 else
-        mkdir -p $RUNDIR/FIC_NAMELIST
-        \cp -rf ${ROOT_DIR}/MUSTANG/NAM_CASES/*txt $RUNDIR/FIC_NAMELIST/.
+        mkdir -p $RUNDIR/MUSTANG_NAMELIST
+        \cp -rf ${ROOT_DIR}/MUSTANG/MUSTANG_NAMELIST/*txt $RUNDIR/MUSTANG_NAMELIST/.
         echo "  file para*txt copied from source directory"
 fi
 
@@ -163,15 +157,15 @@ if [[ $OS == Linux || $OS == Darwin ]] ; then           # ===== LINUX =====
 	if [[ $FC == ifort || $FC == ifc ]] ; then
 		CPP1="cpp -traditional -DLinux -DIfort"
 		CFT1=ifort
-		FFLAGS1="-O3 -fno-alias -i4 -r8 -fp-model precise"
+		FFLAGS1="-O2 -mcmodel=medium -fno-alias -i4 -r8 -fp-model precise"
 #                FFLAGS1="-O0 -g -i4 -r8 -traceback -check all -check bounds \
 #                       -check uninit -CA -CB -CS -ftrapuv -fpe1"
 		LDFLAGS1="$LDFLAGS1"
 	elif [[ $FC == gfortran ]] ; then
 		CPP1="cpp -traditional -DLinux"
 		CFT1=gfortran
-		FFLAGS1="-O3 -fdefault-real-8 -fdefault-double-8"
-#		 FFLAGS1="-O0 -g -fdefault-real-8 -fdefault-double-8 -fbacktrace \
+		FFLAGS1="-O2 -mcmodel=medium -fdefault-real-8 -fdefault-double-8 -std=legacy"
+#		 FFLAGS1="-O0 -g -fdefault-real-8 -fdefault-double-8 -std=legacy -fbacktrace \
 #			-fbounds-check -finit-real=nan -finit-integer=8888"
 		LDFLAGS1="$LDFLAGS1"
 	fi
@@ -235,16 +229,11 @@ XIOS_ROOT_DIR=${CROCO_XIOS_ROOT_DIR-$XIOS_ROOT_DIR}
 if $($CPP1 testkeys.F | grep -i -q xiosisdefined) ; then
         echo " => XIOS activated"
         COMPILEXIOS=TRUE
-        LDFLAGS1="$LDFLAGS1 $XIOS_ROOT_DIR/lib/libxios.a  -lstdc++ -lnetcdff"
+        LDFLAGS1="$LDFLAGS1 $XIOS_ROOT_DIR/lib/libxios.a  -lstdc++ -lnetcdff -lnetcdf"
         CPPFLAGS1="$CPPFLAGS1 -I$XIOS_ROOT_DIR/inc"
         FFLAGS1="$FFLAGS1 -I$XIOS_ROOT_DIR/inc"
 	
         ln -fs $XIOS_ROOT_DIR/bin/xios_server.exe $RUNDIR/.
-	#
-        $CPP1 -P -traditional -imacros cppdefs.h  ${ROOT_DIR}/XIOS/field_def.xml_full $RUNDIR/field_def.xml
-        $CPP1 -P -traditional -imacros cppdefs.h  ${ROOT_DIR}/XIOS/domain_def.xml $RUNDIR/domain_def.xml
-        #$CPP1 -P -traditional -imacros cppdefs.h  ${ROOT_DIR}/XIOS/file_def.xml $RUNDIR/file_def.xml
-        $CPP1 -P -traditional -imacros cppdefs.h  ${ROOT_DIR}/XIOS/iodef.xml $RUNDIR/iodef.xml
 fi
 
 #
@@ -271,13 +260,22 @@ fi
 # prepare and compile the library
 #
 if [[ $COMPILEAGRIF ]] ; then
+# Find the default C compiler
+    CC1=$(echo -e 'dummy_target:\n\t@echo $(CC)' | $MAKE -f - dummy_target)
+    CFLAGS1=$(echo -e 'dummy_target:\n\t@echo $(CFLAGS)' | $MAKE -f - dummy_target)
+# Test if the C compiler is the GNU Compiler
+# if True add '-fcommon' to CFLAGS
+    if command -v "$CC1" >/dev/null && "$CC1" -v 2>&1 | grep -q "gcc version"; then
+	echo "Using the GNU C compiler. Adding -fcommon to CFLAGS"
+	CFLAGS1="$CFLAGS1 -fcommon"
+    fi
 #
 # compile the AGRIF librairy
 #
 	if [[ $COMPILEMPI ]] ; then
-		$MAKE -C AGRIF FC="$CFT1" CPP="$CPP1" CPPFLAGS="-DAGRIF_MPI $MPIINC" FFLAGS="$FFLAGS1"
+		$MAKE -C AGRIF FC="$CFT1" CPP="$CPP1" CPPFLAGS="-DAGRIF_MPI $MPIINC" FFLAGS="$FFLAGS1" CFLAGS="$CFLAGS1"
 	else
-		$MAKE -C AGRIF FC="$CFT1" CPP="$CPP1" FFLAGS="$FFLAGS1"
+		$MAKE -C AGRIF FC="$CFT1" CPP="$CPP1" FFLAGS="$FFLAGS1" CFLAGS="$CFLAGS1"
 	fi
 	if [[ $OS == Darwin ]] ; then          # DARWIN
 # run RANLIB on Darwin system
